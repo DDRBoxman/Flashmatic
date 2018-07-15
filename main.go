@@ -85,7 +85,7 @@ func setupDevices() {
 		panic(err)
 	}
 
-	client, err := mfi.MakeMFIClient("10.42.42.12")
+	client, err := mfi.MakeMFIClient("10.42.42.12", "ubnt", "ubnt")
 	if err != nil {
 		log.Panic(err)
 	}

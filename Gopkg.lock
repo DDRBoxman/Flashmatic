@@ -2,10 +2,10 @@
 
 
 [[projects]]
-  branch = "master"
   name = "github.com/DDRBoxman/mfi"
   packages = ["."]
-  revision = "fbb1550bdf0ba377796340e732e3737f26d5e76c"
+  revision = "a1d7625722b01eaefa846c9c2184af9d7d5855ac"
+  version = "0.0.1"
 
 [[projects]]
   branch = "master"
@@ -27,6 +27,18 @@
 
 [[projects]]
   branch = "master"
+  name = "github.com/huin/goupnp"
+  packages = [
+    ".",
+    "httpu",
+    "scpd",
+    "soap",
+    "ssdp"
+  ]
+  revision = "1395d1447324cbea88d249fbfcfd70ea878fdfca"
+
+[[projects]]
+  branch = "master"
   name = "github.com/karalabe/hid"
   packages = ["."]
   revision = "2270b10f5857b3feaa663e7c869a3b0c45cd6a39"
@@ -41,6 +53,40 @@
     "tiff/lzw"
   ]
   revision = "c73c2afc3b812cdd6385de5a50616511c4a3d458"
+
+[[projects]]
+  branch = "master"
+  name = "golang.org/x/net"
+  packages = [
+    "html",
+    "html/atom",
+    "html/charset"
+  ]
+  revision = "d0887baf81f4598189d4e12a37c6da86f0bba4d0"
+
+[[projects]]
+  name = "golang.org/x/text"
+  packages = [
+    "encoding",
+    "encoding/charmap",
+    "encoding/htmlindex",
+    "encoding/internal",
+    "encoding/internal/identifier",
+    "encoding/japanese",
+    "encoding/korean",
+    "encoding/simplifiedchinese",
+    "encoding/traditionalchinese",
+    "encoding/unicode",
+    "internal/gen",
+    "internal/tag",
+    "internal/utf8internal",
+    "language",
+    "runes",
+    "transform",
+    "unicode/cldr"
+  ]
+  revision = "f21a4dfb5e38f5895301dc265a8def02365cc3d0"
+  version = "v0.3.0"
 
 [solve-meta]
   analyzer-name = "dep"
