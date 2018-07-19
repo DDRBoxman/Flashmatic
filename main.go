@@ -101,19 +101,32 @@ func setupDevices() {
 		ir: ir,
 	}
 
+	hdmi3Command := &lircCommand{
+		command: "BN59-01041A HDMI3",
+		ir: ir,
+	}
+
 	off := device{
 		Name: "Off",
 	}
 
-	/*tv := device{
+	tv := device{
 		Name: "TV",
-	}*/
+		Power: &irRemotePower{
+			onCommand: "BN59-01041A PowerOn",
+			offCommand: "BN59-01041A PowerOff",
+			ir: ir,
+		},
+	}
 
 	ossc := device{
 		Name: "OSSC",
 		Power: &mfiPort{
 			port:   4,
 			client: client,
+		},
+		Commands: []command {
+			hdmi3Command,
 		},
 	}
 
@@ -123,6 +136,9 @@ func setupDevices() {
 			port:   6,
 			client: client,
 		},
+		Commands: []command {
+			osscScartCommand,
+		},
 	}
 
 	nes := device{
@@ -131,10 +147,7 @@ func setupDevices() {
 			port:   1,
 			client: client,
 		},
-		RequiredDevices: []*device{&ossc, &hydra},
-		Commands: []command{
-			osscScartCommand,
-		},
+		RequiredDevices: []*device{&tv, &ossc, &hydra},
 	}
 
 	segaCD := device{
@@ -151,10 +164,7 @@ func setupDevices() {
 			port:   2,
 			client: client,
 		},
-		RequiredDevices: []*device{&ossc, &hydra, &segaCD},
-		Commands: []command{
-			osscScartCommand,
-		},
+		RequiredDevices: []*device{&tv, &ossc, &hydra, &segaCD},
 	}
 
 	n64 := device{
@@ -163,10 +173,7 @@ func setupDevices() {
 			port:   7,
 			client: client,
 		},
-		RequiredDevices: []*device{&ossc, &hydra},
-		Commands: []command{
-			osscScartCommand,
-		},
+		RequiredDevices: []*device{&tv, &ossc, &hydra},
 	}
 
 	ps1 := device{
@@ -175,10 +182,7 @@ func setupDevices() {
 			port:   8,
 			client: client,
 		},
-		RequiredDevices: []*device{&ossc, &hydra},
-		Commands: []command{
-			osscScartCommand,
-		},
+		RequiredDevices: []*device{&tv,  &ossc, &hydra},
 	}
 
 	gamecube := device{
@@ -261,7 +265,15 @@ func updateToDeviceDesiredState(d *device) {
 	time.Sleep(5 * time.Second)
 
 	// Send commands for device
+	sendCommands(d)
+}
+
+func sendCommands(d *device) {
 	for _, command := range d.Commands {
 		command.Send()
+	}
+
+	for _, device := range d.RequiredDevices {
+		sendCommands(device)
 	}
 }

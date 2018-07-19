@@ -24,6 +24,20 @@ type power interface {
 	Off()
 }
 
+type irRemotePower struct {
+	onCommand string
+	offCommand string
+	ir *lirc.Router
+}
+
+func (p *irRemotePower) On() {
+	p.ir.Send(p.onCommand)
+}
+
+func (p *irRemotePower) Off() {
+	p.ir.Send(p.offCommand)
+}
+
 type mfiPort struct {
 	port   int
 	client *mfi.MFIClient
