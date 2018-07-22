@@ -67,6 +67,10 @@ func main() {
 					if device, ok := deviceIcons[event.id]; ok {
 						go updateToDeviceDesiredState(device)
 					}
+
+					if cmd, ok := commandIcons[event.id]; ok {
+						(*cmd).Send()
+					}
 				}
 			}
 		case <-backlightTimer.C:
@@ -201,6 +205,18 @@ func setupDevices() {
 	makeDeviceIcon(streamDeck, ps1, "./assets/icons/consoles/Psone.gif", 1)
 	makeDeviceIcon(streamDeck, gamecube, "./assets/icons/Ngc_Violet03.png", 0)
 
+	volup := lircCommand{
+		command: "BN59-01041A V_UP",
+		ir: ir,
+	}
+
+	voldown := lircCommand{
+		command: "BN59-01041A V_DOWN",
+		ir: ir,
+	}
+
+	makeCommandIcon(streamDeck, &volup, "./assets/icons/vol_up.png", 13)
+	makeCommandIcon(streamDeck, &voldown, "./assets/icons/vol_down.png", 14)
   /*
 	writeIconToKey(deck, 0, "./assets/icons/consoles/Ps2_07.gif")
 	writeIconToKey(deck, 9, "./assets/icons/consoles/DC03.gif")
@@ -209,6 +225,14 @@ func setupDevices() {
 }
 
 var deviceIcons = map[int]*device{}
+
+var commandIcons = map[int]*command{}
+
+func makeCommandIcon(deck streamdeck.StreamDeck, command command, iconPath string, key int) {
+	writeIconToKey(deck, key, iconPath)
+	commandIcons[key] = &command
+}
+
 
 func makeDeviceIcon(deck streamdeck.StreamDeck, device device, iconPath string, key int) {
 	writeIconToKey(deck, key, iconPath)
