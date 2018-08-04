@@ -3,6 +3,8 @@ package main
 import (
 	"github.com/DDRBoxman/mfi"
 	"github.com/chbmuc/lirc"
+	"github.com/tarm/serial"
+	"log"
 )
 
 type device struct {
@@ -58,4 +60,26 @@ type lircCommand struct {
 
 func (l *lircCommand) Send() {
 	l.ir.Send(l.command)
+}
+
+// Logitech HDMI Switch
+type aviorCommand struct {
+	command string
+	Port *serial.Port
+}
+
+func (a *aviorCommand) Send() {
+	n, err := a.Port.Write([]byte(a.command))
+	if err != nil {
+		log.Print("Failed to write to serial port ", err)
+	}
+
+	log.Printf("Wrote %d bytes to serial port \n", n)
+
+	buf := make([]byte, 128)
+	n, err = a.Port.Read(buf)
+	if err != nil {
+		log.Fatal(err)
+	}
+	log.Printf("%q", buf[:n])
 }

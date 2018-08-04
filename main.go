@@ -9,6 +9,7 @@ import (
 	"github.com/DDRBoxman/streamdeck-go"
 	"github.com/DDRBoxman/mfi"
 	"github.com/chbmuc/lirc"
+	"github.com/tarm/serial"
 )
 
 var animatedKeys = []*animatedKey{}
@@ -84,6 +85,12 @@ func main() {
 }
 
 func setupDevices() {
+	c := &serial.Config{Name: "/dev/ttyUSB0", Baud: 19200}
+	s, err := serial.OpenPort(c)
+	if err != nil {
+		log.Fatal(err)
+	}
+
 	ir, err := lirc.Init("/var/run/lirc/lircd")
 	if err != nil {
 		panic(err)
@@ -107,6 +114,11 @@ func setupDevices() {
 
 	hdmi3Command := &lircCommand{
 		command: "BN59-01041A HDMI3",
+		ir: ir,
+	}
+
+	hdmi2Command := &lircCommand{
+		command: "BN59-01041A HDMI2",
 		ir: ir,
 	}
 
@@ -189,12 +201,39 @@ func setupDevices() {
 		RequiredDevices: []*device{&tv,  &ossc, &hydra},
 	}
 
+	hdmiSwitch := device{
+		Commands: []command{hdmi2Command},
+	}
+
 	gamecube := device{
 		Name: "GameCube",
+		RequiredDevices: []*device{&tv, &hdmiSwitch},
 		Power: &mfiPort{
-			port:   8,
+			port:   5,
 			client: client,
 		},
+		Commands: []command{&aviorCommand{
+			Port: s,
+			command: "sw i02\r",
+		}},
+	}
+
+	snes := device{
+		Name: "SNES",
+		RequiredDevices: []*device{&tv, &hdmiSwitch},
+		Commands: []command{&aviorCommand{
+			Port: s,
+			command: "sw i01\r",
+		}},
+	}
+
+	xbone := device{
+		Name: "XBox One",
+		RequiredDevices: []*device{&tv, &hdmiSwitch},
+		Commands: []command{&aviorCommand{
+			Port: s,
+			command: "sw i03\r",
+		}},
 	}
 
 	makeDeviceAnimatedIcon(off, "./assets/icons/kirby_sleeping.gif", 10)
@@ -204,6 +243,8 @@ func setupDevices() {
 	makeDeviceIcon(streamDeck, n64, "./assets/icons/consoles/N64.gif", 2)
 	makeDeviceIcon(streamDeck, ps1, "./assets/icons/consoles/Psone.gif", 1)
 	makeDeviceIcon(streamDeck, gamecube, "./assets/icons/Ngc_Violet03.png", 0)
+	makeDeviceIcon(streamDeck, snes, "./assets/icons/consoles/Snes2.gif", 7)
+	makeDeviceIcon(streamDeck, xbone, "./assets/icons/xbone.png", 8)
 
 	volup := lircCommand{
 		command: "BN59-01041A V_UP",
