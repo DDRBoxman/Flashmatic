@@ -63,6 +63,8 @@ func (l *lircCommand) Send() {
 }
 
 // Logitech HDMI Switch
+// Uses ATEN VS0801H
+// swmode default - disables detect switching useful for consoles like wii u
 type aviorCommand struct {
 	command string
 	Port *serial.Port
