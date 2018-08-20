@@ -14,7 +14,7 @@ let buttonsDiv = document.getElementById('buttons');
 for (i = 0; i < 15; i++) {
   let button = document.createElement("img");
   button.id = "button_" + i;
-  button.src = "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==";
+  button.src = "data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=";
   let id = i;
   button.addEventListener("mouseup", () => {
     mouseUpFunction(id);
