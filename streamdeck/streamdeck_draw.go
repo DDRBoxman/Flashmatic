@@ -59,6 +59,12 @@ func setIconAnimated(key int, path string) error {
 		lastDraw: time.Now(),
 	})
 
+	// Scale and write first frame for non animated keys
+	dest := image.NewRGBA(image.Rect(0, 0, streamdeck.ICON_SIZE, streamdeck.ICON_SIZE))
+	scaled := imaging.Resize(gifData.Image[0], streamdeck.ICON_SIZE, 0, imaging.NearestNeighbor)
+	draw.Draw(dest, scaled.Bounds(), scaled, image.ZP, draw.Over)
+	streamDeck.WriteImageToKey(dest, key)
+
 	return nil
 }
 
