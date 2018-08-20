@@ -1,0 +1,40 @@
+body {
+  font-family: "Roboto", sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #3c3f41;
+}
+
+.deck {
+  border-radius: 25px;
+  background: #231f20;
+  color: white;
+  max-width: 440px;
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+}
+.deck h2 {
+  margin-top: 0px;
+}
+.deck .buttons {
+  display: flex;
+  flex-direction: row-reverse;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.deck .buttons img {
+  width: 72px;
+  height: 72px;
+  border-radius: 10px;
+  margin: 7px;
+  background-color: black;
+  border: 0;
+}
+
+.deck .buttons img :hover {
+  opacity: 0.4;
+}

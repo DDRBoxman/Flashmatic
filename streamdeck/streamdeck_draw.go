@@ -1,4 +1,4 @@
-package main
+package streamdeck
 
 import (
 	"github.com/DDRBoxman/streamdeck-go"
@@ -10,6 +10,15 @@ import (
 	"github.com/disintegration/imaging"
 )
 
+var animatedKeys = []*animatedKey{}
+
+type animatedKey struct {
+	gif          *gif.GIF
+	currentFrame int
+	key          int
+	lastDraw     time.Time
+}
+
 func clearKeys(deck streamdeck.StreamDeck) {
 	for i := 0; i<15; i++ {
 		dest := image.NewRGBA(image.Rect(0, 0, streamdeck.ICON_SIZE, streamdeck.ICON_SIZE))
@@ -19,6 +28,9 @@ func clearKeys(deck streamdeck.StreamDeck) {
 
 func animateKeys(deck streamdeck.StreamDeck) {
 	for _, key := range animatedKeys {
+		if len(key.gif.Image) <= 1 {
+			continue
+		}
 		keyDuration := time.Duration(key.gif.Delay[key.currentFrame]*10)*time.Millisecond
 		if time.Now().Sub(key.lastDraw) > keyDuration {
 			key.lastDraw = time.Now()

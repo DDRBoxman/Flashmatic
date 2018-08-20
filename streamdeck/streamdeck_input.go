@@ -1,9 +1,18 @@
-package main
+package streamdeck
 
 import (
 	"log"
 	"github.com/DDRBoxman/streamdeck-go"
+	"time"
 )
+
+type eventType string
+
+const ButtonUpEvent eventType = "buttonUp"
+const ButtonDownEvent eventType = "buttonDown"
+
+const backlightTimeout = 15 * time.Second
+
 
 type event struct {
 	eventType eventType
