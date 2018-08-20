@@ -34,6 +34,8 @@ func StartStreamdeck(display *display.Display, keychan chan int) {
 
 		backlightOff := false
 
+		animateTimer := time.NewTicker(150 * time.Millisecond)
+
 		for {
 			select {
 			case event := <-eventChan:
@@ -50,9 +52,8 @@ func StartStreamdeck(display *display.Display, keychan chan int) {
 			case <-backlightTimer.C:
 				streamDeck.SetBrightness(0)
 				backlightOff = true
-			default:
+			case <-animateTimer.C:
 				animateKeys(streamDeck)
-				time.Sleep(150)
 			}
 		}
 	}
@@ -60,7 +61,7 @@ func StartStreamdeck(display *display.Display, keychan chan int) {
 
 func setupIcons(display *display.Display) {
 	for _, icon := range display.Icons {
-		if filepath.Ext(icon.IconPath) == "gif" {
+		if filepath.Ext(icon.IconPath) == ".gif" {
 			setIconAnimated(icon.KeyID, filepath.Join(display.IconDir, icon.IconPath))
 		} else {
 			writeIconToKey(streamDeck, icon.KeyID, filepath.Join(display.IconDir, icon.IconPath))
