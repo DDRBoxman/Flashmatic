@@ -34,7 +34,7 @@ func StartServer(display *display.Display, keychan chan int) {
 		json.NewEncoder(w).Encode(display.Icons)
 	}).Methods("GET")
 
-	router.PathPrefix("/icon").Handler(http.StripPrefix("/icon", http.FileServer(http.Dir(display.IconDir))))
+	router.PathPrefix("/icon/").Handler(http.StripPrefix("/icon/", http.FileServer(http.Dir(display.IconDir))))
 	router.PathPrefix("/").Handler(http.FileServer(http.Dir("public")))
 
 	if err := http.ListenAndServe(":8080", router); err != nil {
