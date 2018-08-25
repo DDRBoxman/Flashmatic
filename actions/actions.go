@@ -184,6 +184,15 @@ func SetupDevices() (chan int) {
 		}},
 	}
 
+	ps3 := devices.Device{
+		Name: "PS3",
+		RequiredDevices: []*devices.Device{&tv, &hdmiSwitch},
+		Commands: []devices.Command{&devices.AviorCommand{
+			Port:    s,
+			Command: "sw i06\r",
+		}},
+	}
+
 	addDeviceAction(off, 10)
 
 	addDeviceAction(nes, 4)
@@ -191,9 +200,10 @@ func SetupDevices() (chan int) {
 	addDeviceAction(n64, 2)
 	addDeviceAction(ps1, 1)
 	addDeviceAction(gamecube, 0)
-	addDeviceAction(snes, 7)
-	addDeviceAction(xbone, 8)
-	addDeviceAction(ps4, 9)
+	addDeviceAction(snes, 9)
+	addDeviceAction(xbone, 6)
+	addDeviceAction(ps4, 8)
+	addDeviceAction(ps3,7)
 
 	volup := devices.LircCommand{
 		Command: "BN59-01041A V_UP",

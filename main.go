@@ -22,9 +22,10 @@ func main() {
 	display.AddIcon(2, "consoles/N64.gif")
 	display.AddIcon(1, "consoles/Psone.gif")
 	display.AddIcon(0, "Ngc_Violet03.png")
-	display.AddIcon(7, "consoles/Snes2.gif")
-	display.AddIcon(8, "xbone.png")
-	display.AddIcon(9, "ps4.png")
+	display.AddIcon(9, "consoles/Snes2.gif")
+	display.AddIcon(6, "xbone.png")
+	display.AddIcon(8, "ps4.png")
+	display.AddIcon(7, "ps3.png")
 	display.AddIcon(13, "vol_up.png")
 	display.AddIcon(14, "vol_down.png")
 
