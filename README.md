@@ -12,7 +12,8 @@ Displays avaliable consoles as icons on a streamdeck. When a console is selected
 * [Streamdeck](https://www.elgato.com/en/gaming/stream-deck)
 * [Ubiquiti mPower Pro](https://www.ubnt.com/mfi/mpower/)
 
-## Retro Console Hardware
+## Console Hardware
+* IOGear [GHSW8181](https://www.amazon.com/IOGEAR-8-Port-Switch-Support-GHSW8181/dp/B005S0YNNM/ref=sr_1_1?ie=UTF8&qid=1535815614&sr=8-1&keywords=iogear+hdmi+switch+8) (8 port hdmi switch with rs-232)
 * OSSC
 * Hydra Scart Switcher
 * RGB modded consoles
