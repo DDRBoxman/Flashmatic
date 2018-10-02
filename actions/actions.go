@@ -246,6 +246,8 @@ func updateToDeviceDesiredState(d *devices.Device) {
 		desiredActive = append(desiredActive, device)
 	}
 
+	desiredActive = append(desiredActive, d)
+
 	desiredInactive := []*devices.Device{}
 	for _, s1 := range activeDevices {
 		found := false
