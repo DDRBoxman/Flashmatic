@@ -1,12 +1,12 @@
 package main
 
 import (
-	"sync"
-	"github.com/DDRBoxman/Flashmatic/streamdeck"
-		"github.com/DDRBoxman/Flashmatic/web"
-	"github.com/DDRBoxman/Flashmatic/display"
-	"log"
 	"github.com/DDRBoxman/Flashmatic/actions"
+	"github.com/DDRBoxman/Flashmatic/display"
+	"github.com/DDRBoxman/Flashmatic/streamdeck"
+	"github.com/DDRBoxman/Flashmatic/web"
+	"log"
+	"sync"
 )
 
 func main() {
@@ -26,6 +26,8 @@ func main() {
 	display.AddIcon(6, "xbone.png")
 	display.AddIcon(8, "ps4.png")
 	display.AddIcon(7, "ps3.png")
+	display.AddIcon(5, "consoles/Ps2_08.gif")
+	display.AddIcon(14, "vol_down.png")
 	display.AddIcon(13, "vol_up.png")
 	display.AddIcon(14, "vol_down.png")
 

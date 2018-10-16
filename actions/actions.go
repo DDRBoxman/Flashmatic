@@ -1,11 +1,11 @@
 package actions
 
 import (
-	"log"
-	"github.com/tarm/serial"
-	"github.com/chbmuc/lirc"
-	"github.com/DDRBoxman/mfi"
 	"github.com/DDRBoxman/Flashmatic/devices"
+	"github.com/DDRBoxman/mfi"
+	"github.com/chbmuc/lirc"
+	"github.com/tarm/serial"
+	"log"
 	"time"
 )
 
@@ -23,7 +23,7 @@ func addDeviceAction(device devices.Device, key int) {
 
 var keychan = make(chan int, 100)
 
-func SetupDevices() (chan int) {
+func SetupDevices() chan int {
 	c := &serial.Config{Name: "/dev/ttyUSB0", Baud: 19200}
 	s, err := serial.OpenPort(c)
 	if err != nil {
@@ -185,12 +185,17 @@ func SetupDevices() (chan int) {
 	}
 
 	ps3 := devices.Device{
-		Name: "PS3",
+		Name:            "PS3",
 		RequiredDevices: []*devices.Device{&tv, &hdmiSwitch},
 		Commands: []devices.Command{&devices.AviorCommand{
 			Port:    s,
 			Command: "sw i06\r",
 		}},
+	}
+
+	ps2 := devices.Device{
+		Name:            "PS2",
+		RequiredDevices: []*devices.Device{&tv, &ossc, &hydra},
 	}
 
 	addDeviceAction(off, 10)
@@ -203,7 +208,8 @@ func SetupDevices() (chan int) {
 	addDeviceAction(snes, 9)
 	addDeviceAction(xbone, 6)
 	addDeviceAction(ps4, 8)
-	addDeviceAction(ps3,7)
+	addDeviceAction(ps3, 7)
+	addDeviceAction(ps2, 5)
 
 	volup := devices.LircCommand{
 		Command: "BN59-01041A V_UP",
