@@ -2,12 +2,12 @@ package streamdeck
 
 import (
 	"github.com/DDRBoxman/streamdeck-go"
-	"time"
-	"os"
-	"image/gif"
+	"github.com/disintegration/imaging"
 	"image"
 	"image/draw"
-	"github.com/disintegration/imaging"
+	"image/gif"
+	"os"
+	"time"
 )
 
 var animatedKeys = []*animatedKey{}
@@ -20,7 +20,7 @@ type animatedKey struct {
 }
 
 func clearKeys(deck streamdeck.StreamDeck) {
-	for i := 0; i<15; i++ {
+	for i := 0; i < 15; i++ {
 		dest := image.NewRGBA(image.Rect(0, 0, streamdeck.ICON_SIZE, streamdeck.ICON_SIZE))
 		deck.WriteImageToKey(dest, i)
 	}
@@ -31,7 +31,7 @@ func animateKeys(deck streamdeck.StreamDeck) {
 		if len(key.gif.Image) <= 1 {
 			continue
 		}
-		keyDuration := time.Duration(key.gif.Delay[key.currentFrame]*10)*time.Millisecond
+		keyDuration := time.Duration(key.gif.Delay[key.currentFrame]*10) * time.Millisecond
 		if time.Now().Sub(key.lastDraw) > keyDuration {
 			key.lastDraw = time.Now()
 			key.currentFrame++
@@ -56,7 +56,7 @@ func setIconAnimated(key int, path string) error {
 		key:          key,
 		gif:          gifData,
 		currentFrame: 0,
-		lastDraw: time.Now(),
+		lastDraw:     time.Now(),
 	})
 
 	// Scale and write first frame for non animated keys

@@ -11,7 +11,7 @@ type Device struct {
 	Name            string
 	Power           Power
 	RequiredDevices []*Device
-	Commands []Command
+	Commands        []Command
 }
 
 type Command interface {
@@ -27,9 +27,9 @@ type Power interface {
 }
 
 type IrRemotePower struct {
-	OnCommand string
+	OnCommand  string
 	OffCommand string
-	Ir *lirc.Router
+	Ir         *lirc.Router
 }
 
 func (p *IrRemotePower) On() {
@@ -55,7 +55,7 @@ func (p *MfiPort) Off() {
 
 type LircCommand struct {
 	Command string
-	Ir *lirc.Router
+	Ir      *lirc.Router
 }
 
 func (l *LircCommand) Send() {
@@ -67,7 +67,7 @@ func (l *LircCommand) Send() {
 // swmode default - disables detect switching useful for consoles like wii u
 type AviorCommand struct {
 	Command string
-	Port *serial.Port
+	Port    *serial.Port
 }
 
 func (a *AviorCommand) Send() {

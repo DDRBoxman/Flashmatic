@@ -1,13 +1,13 @@
 package display
 
 import (
-	"os"
 	"fmt"
-	)
+	"os"
+)
 
 type Icon struct {
 	IconPath string `json:"icon_path"`
-	KeyID    int `json:"key_id"`
+	KeyID    int    `json:"key_id"`
 }
 
 type Display struct {

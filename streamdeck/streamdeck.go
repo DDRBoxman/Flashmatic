@@ -1,11 +1,11 @@
 package streamdeck
 
 import (
+	"github.com/DDRBoxman/Flashmatic/display"
 	"github.com/DDRBoxman/streamdeck-go"
 	"log"
-	"time"
-	"github.com/DDRBoxman/Flashmatic/display"
 	"path/filepath"
+	"time"
 )
 
 var streamDeck streamdeck.StreamDeck

@@ -1,11 +1,11 @@
 package web
 
 import (
-	"github.com/gorilla/mux"
-	"net/http"
-		"log"
-	"github.com/DDRBoxman/Flashmatic/display"
 	"encoding/json"
+	"github.com/DDRBoxman/Flashmatic/display"
+	"github.com/gorilla/mux"
+	"log"
+	"net/http"
 )
 
 type keyEvent struct {
