@@ -234,6 +234,14 @@ func SetupDevices() chan int {
 	addCommandAction(&volup, 13)
 	addCommandAction(&voldown, 14)
 
+    // Disable auto switching on the hdmi switch
+    // apparently this resets if it loses power :|
+	disableSwitching := devices.AviorCommand{
+		Command: "swmode default\r",
+		Port: s,
+	}
+	disableSwitching.Send()
+
 	go processKeyEvents()
 
 	return keychan
