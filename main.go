@@ -27,7 +27,7 @@ func main() {
 	display.AddIcon(8, "ps4.png")
 	display.AddIcon(7, "ps3.png")
 	display.AddIcon(5, "consoles/Ps2_08.gif")
-	display.AddIcon(14, "vol_down.png")
+	display.AddIcon(12, "switch.png")
 	display.AddIcon(13, "vol_up.png")
 	display.AddIcon(14, "vol_down.png")
 

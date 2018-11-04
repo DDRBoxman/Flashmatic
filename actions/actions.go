@@ -198,6 +198,15 @@ func SetupDevices() chan int {
 		RequiredDevices: []*devices.Device{&tv, &ossc, &hydra},
 	}
 
+	nintendoSwitch := devices.Device{
+		Name:            "Switch",
+		RequiredDevices: []*devices.Device{&tv, &hdmiSwitch},
+		Commands: []devices.Command{&devices.AviorCommand{
+			Port:    s,
+			Command: "sw i07\r",
+		}},
+	}
+
 	addDeviceAction(off, 10)
 
 	addDeviceAction(nes, 4)
@@ -210,6 +219,7 @@ func SetupDevices() chan int {
 	addDeviceAction(ps4, 8)
 	addDeviceAction(ps3, 7)
 	addDeviceAction(ps2, 5)
+	addDeviceAction(nintendoSwitch, 12)
 
 	volup := devices.LircCommand{
 		Command: "BN59-01041A V_UP",
